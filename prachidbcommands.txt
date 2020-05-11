@@ -1,0 +1,258 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 127
+Server version: 8.0.18 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| retail             |
+| sakila             |
+| sd                 |
+| sd1                |
+| shop               |
+| sys                |
+| world              |
++--------------------+
+10 rows in set (0.01 sec)
+
+mysql> create database prachi;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use prachi;
+Database changed
+mysql> create table customer (customerid varchar(256), customername varchar(256), state varchar(256), city varchar(256));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> crate table product (productid varchar(256), category varchar(256), subcategory varchar(256), productname varchar(256), quantity int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'crate table product (productid varchar(256), category varchar(256), subcategory ' at line 1
+mysql> create table product (productid varchar(256), category varchar(256), subcategory varchar(256), productname varchar(256), quantity int);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table transaction(transactionid varchar(256), payment varchar(256));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table fact
+    -> (SRNO int not null autoincrement,
+    -> sales float(7,2) not null,
+    -> profit float(7,2) not null,
+    -> primary key(SRNO));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'autoincrement,
+sales float(7,2) not null,
+profit float(7,2) not null,
+primary ke' at line 2
+mysql> create table fact
+    -> (SRNO int not null auto_increment,
+    -> sales float(7,2) not null,
+    -> profit float(7,2) not null,
+    -> primary key(SRNO));
+Query OK, 0 rows affected, 2 warnings (0.04 sec)
+
+mysql> alter table fact add column productId varchar(256);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table fact add column customerId varchar(256);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table fact add column transactionId varchar(256);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table fact add constraint fkfromproduct foreign key(productId) references product(productid);
+ERROR 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'fkfromproduct' in the referenced table 'product'
+mysql> desc product;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| productid   | varchar(256) | YES  |     | NULL    |       |
+| category    | varchar(256) | YES  |     | NULL    |       |
+| subcategory | varchar(256) | YES  |     | NULL    |       |
+| productname | varchar(256) | YES  |     | NULL    |       |
+| quantity    | int(11)      | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> alter table fact add constraint fkfromproduct foreign key(productId) references product(productid);
+ERROR 1822 (HY000): Failed to add the foreign key constraint. Missing index for constraint 'fkfromproduct' in the referenced table 'product'
+mysql> alter table product add constraint primary key(productid);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table customer add constraint primary key(customerid);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table transaction add constraint primary key(transactionid);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table fact add constraint fkfromproduct foreign key(productId) references product(productid);
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table fact add constraint fkfromcustomer foreign key(customerId) references customer(customerid);
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table fact add constraint fkfromtransaction foreign key(transactionId) references transaction(transactionid);
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc fact;
++---------------+--------------+------+-----+---------+----------------+
+| Field         | Type         | Null | Key | Default | Extra          |
++---------------+--------------+------+-----+---------+----------------+
+| SRNO          | int(11)      | NO   | PRI | NULL    | auto_increment |
+| sales         | float(7,2)   | NO   |     | NULL    |                |
+| profit        | float(7,2)   | NO   |     | NULL    |                |
+| productId     | varchar(256) | YES  | MUL | NULL    |                |
+| customerId    | varchar(256) | YES  | MUL | NULL    |                |
+| transactionId | varchar(256) | YES  | MUL | NULL    |                |
++---------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.01 sec)
+
+mysql> grant all privileges on *.* to root@localhost identified by 'root' with grant option;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'identified by 'root' with grant option' at line 1
+mysql> alter table transaction add transactiondate date;
+ERROR 1060 (42S21): Duplicate column name 'transactiondate'
+mysql> alter table 'transcation' drop 'transactiondate';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''transcation' drop 'transactiondate'' at line 1
+mysql> alter table 'transcation' drop column 'transactiondate';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''transcation' drop column 'transactiondate'' at line 1
+mysql> alter table transcation drop column 'transactiondate';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''transactiondate'' at line 1
+mysql> alter table transcation drop column transactiondate;
+ERROR 1146 (42S02): Table 'prachi.transcation' doesn't exist
+mysql> show databse;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'databse' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| prachi             |
+| retail             |
+| sakila             |
+| sd                 |
+| sd1                |
+| shop               |
+| sys                |
+| world              |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> use prachi;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_prachi |
++------------------+
+| customer         |
+| fact             |
+| product          |
+| transaction      |
++------------------+
+4 rows in set (0.00 sec)
+
+mysql> alter table transaction drop column transactiondate;
+Query OK, 0 rows affected (0.21 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> create table date(dateid varchar(256), day varchar(3), month varchar(15), year varchar(5);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> create table date(dateid varchar(256), day varchar(3), month varchar(15), year varchar(5));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> alter table date add constraint primarykey(dateid);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(dateid)' at line 1
+mysql> alter table date add constraint primary key(dateid);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table fact add column dateid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> alter table fact add dateid varchar(30);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>  alter table fact add constraint fkfromdate foreign key(dateId) references customer(dateid);
+ERROR 3734 (HY000): Failed to add the foreign key constraint. Missing column 'dateid' for constraint 'fkfromdate' in the referenced table 'customer'
+mysql>  alter table fact add constraint fkfromdate foreign key(dateId) references date(dateid);
+Query OK, 14 rows affected (0.06 sec)
+Records: 14  Duplicates: 0  Warnings: 0
+
+mysql>  create table fact
+    ->     -> (SRNO int not null auto_increment,
+    ->     -> sales float(7,2) not null,
+    ->     -> profit float(7,2) not null,
+    ->     -> primary key(SRNO));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> (SRNO int not null auto_increment,
+    -> sales float(7,2) not null,
+    -> p' at line 2
+mysql>  create table fact
+    ->     -> (SRNO int not null auto_increment,
+    ->
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> (SRNO int not null auto_increment,' at line 2
+mysql> create table fact
+    -> ( SRNO int not null auto_increment,
+    -> sales float not null,
+    -> profit float not null,
+    -> primary key (SRNO));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> alter table fact add constraint fkfromproduct foreign key(productId) references product(productid);
+ERROR 1072 (42000): Key column 'productId' doesn't exist in table
+mysql> alter table fact add column productId varchar(256);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table fact add column customerId varchar(256);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table fact add column transactionId varchar(256);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table fact add column dateId varchar(256);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table fact add constraint fkfromproduct foreign key(productId) references product(productid);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table fact add constraint fkfromproduct foreign key(customerId) references product(customerid);
+ERROR 1061 (42000): Duplicate key name 'fkfromproduct'
+mysql> alter table fact add constraint fkfromcustomer foreign key(customerId) references product(customerid);
+ERROR 3734 (HY000): Failed to add the foreign key constraint. Missing column 'customerid' for constraint 'fkfromcustomer' in the referenced table 'product'
+mysql> alter table fact add constraint fkfromcustomer foreign key(customerId) references customer(customerid);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table fact add constraint fkfromtransaction foreign key(transactionId) references transaction(transactionid);
+Query OK, 0 rows affected (0.17 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table fact add constraint fkfromdate foreign key(dateId) references date(dateid);
+Query OK, 0 rows affected (0.19 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>

@@ -1,0 +1,31 @@
+productid ,category ,subcategory ,productname ,quantity
+p001,Office Supplies,Paper,Xerox 195,2
+p002,Office Supplies,Paper,Xerox 1880,2
+p003,Office Supplies,Art,"Sanford Colorific Colored Pencils, 12/Box",2
+p004,Office Supplies,Fasteners,Ideal Clamps,4
+p005,Office Supplies,Binders,GBC Wire Binding Strips,3
+p006,Office Supplies,Supplies,Fiskars Softgrip Scissors,2
+p007,Furniture,Furnishings,Longer-Life Soft White Bulbs,6
+p008,Furniture,Furnishings,"Howard Miller 13-3/4"" Diameter Brushed Chrome Round Wall Clock",6
+p009,Office Supplies,Art,Newell 343,2
+p010,Office Supplies,Envelopes,Convenience Packs of Business Envelopes,1
+p011,Office Supplies,Paper,Xerox 1911,7
+p012,Office Supplies,Appliances,Sanyo 2.5 Cubic Foot Mid-Size Office Refrigerators,5
+p013,Office Supplies,Storage,Safco Industrial Wire Shelving,6
+p014,Furniture,Furnishings,"Seth Thomas 14"" Putty-Colored Wall Clock",5
+p015,Technology,Phones,Plantronics Cordless Phone Headset with In-line Volume - M214C,5
+p016,Technology,Phones,Anker Astro 15000mAh USB Portable Charger,2
+p017,Furniture,Chairs,"Hon Deluxe Fabric Upholstered Stacking Chairs, Rounded Back",2
+p018,Office Supplies,Binders,GBC Prestige Therm-A-Bind Covers,4
+p019,Office Supplies,Appliances,Belkin 7 Outlet SurgeMaster Surge Protector with Phone Protection,1
+p020,Technology,Phones,Jabra BIZ 2300 Duo QD Duo Corded Headset,2
+p021,Office Supplies,Paper,Southworth 25% Cotton Antique Laid Paper & Envelopes,6
+p022,Office Supplies,Paper,Xerox 1883,3
+p023,Office Supplies,Storage,"Tenex Personal Project File with Scoop Front Design, Black",4
+p024,Office Supplies,Art,Newell 311,5
+p025,Furniture,Chairs,Global Deluxe High-Back Manager's Chair,8
+p026,Office Supplies,Labels,Avery 519,4
+p027,Technology,Phones,Avaya 5420 Digital phone,2
+p028,Office Supplies,Paper,Xerox 1920,1
+p029,Technology,Accessories,Lenovo 17-Key USB Numeric Keypad,3
+p030,Office Supplies,Envelopes,Staple envelope,8
